@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>cgpa calculator</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <style>
+            body{
+                background: url("bg.png");
+                background-attachment: fixed;
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
+            #ans{
+                text-align: center;
+            }
+            h1{
+                font-family: 'Righteous', cursive;
+                font-size: xx-large;
+                font-weight: bolder;
+                color: rgba(194, 32, 167, 0.356);
+                text-shadow: 2px 2px white;
+            }
+            #head{
+                text-align: center;
+                margin-top: 5%;
+            }
+            input{
+                border-radius: 10px;
+                background-color:  rgba(64, 32, 194, 0.036);
+                color: aliceblue;
+                text-align: center;
+                width: 150px;
+            }
+            tr,th,td{
+                padding: 10px;
+                font-family: 'Righteous', cursive;
+                font-size: 18pt;
+                font-weight: bold;
+                color: rgba(194, 32, 167, 0.356);
+                text-shadow: 2px 2px white;
+            }
+            #add,#submit,label,#start{
+                margin: 10px;
+                text-align: center;
+                border-radius: 5px;
+                font-size: 15pt;
+                font-family: 'Righteous', cursive;
+            }
+            #sem{
+                
+                padding: 10px;
+                
+                font-family: 'Righteous', cursive;
+                font-size: 18pt;
+                font-weight: bold;
+                color: rgba(194, 32, 167, 0.356);
+                text-shadow: 2px 2px white;
+            }
+            .sem{
+                font-family: 'Righteous', cursive;
+                font-size: 15pt;
+                font-weight: bold;
+                color: rgba(0, 0, 0, 0.762);
+                text-shadow: 2px 2px white;
+                border-radius: 5px;
+
+            }
+            #numbers{
+                font-size: 200pt;
+                font-weight: bolder;
+                /* font-family: 'Righteous', cursive; */
+                color: rgba(194, 32, 167, 0.356);
+                text-shadow: 2px 2px white;
+                display: none;
+
+            }
+            #first{
+                text-align: center;
+            }
+            #answer_gpa,#tcgpa{
+                margin: 10px;
+                text-align: center;
+                border-radius: 5px;
+                font-size: 15pt;
+                font-family: 'Righteous', cursive;
+                /* color: aliceblue; */
+            }
+            .adddiv,.subdiv{
+                text-align: center;
+            }
+            #right{
+                display: none;
+            }
+            #semster{
+                text-align: center;
+            }
+            #totans{
+                display: none;
+            }
+        </style>
+        <script>
+            // document.getElementById("left").style.width="100%";
+            var tc=0,tg=0;
+            var inn = 1;
+            var credit=0,grade=0;
+            var rowCount=1;
+            // document.getElementById("right").style.display="none";
+            // document.getElementById("first").innerHTML=Image;
+            var sem=2;
+            let ss=0;
+            function start(){
+                document.getElementById("numbers").style.display="block";
+                selectElement = document.querySelector('#semselect');
+                ss = selectElement.value;
+                // ss=parseInt(output); 
+                
+            }
+            function myFunction() {
+                
+                if(ss==0){
+                    alert("Select the semester and click start");
+                    // return;
+                    
+                }
+
+                else{
+
+                
+                    var flg=0;
+                    var g=document.getElementById("grade").value; 
+                    var cr=document.getElementById("credit").value;
+                    if(g=="O")
+                    grade+=10*cr;
+                    else if(g=="A+")
+                grade+=9*cr;
+                else if(g=="A")
+                grade+=8*cr;
+                else if(g=="B+")
+                grade+=7*cr;
+                else if(g=="B")
+                grade+=6*cr;
+                else if(g=="RA")
+                grade+=0;
+                else if(g=="AB" || g=="SA" || g=="W")
+                grade+=0;
+                else{
+                    alert("invalid details");
+                    flg=1;
+                }
+                if(isNaN(cr)){
+                    alert("invalid details");
+
+                flg=1;
+                }
+                
+                if(flg==0){
+                    rowCount+=1;
+                    document.getElementById("right").style.display="block";
+                    // document.getElementById("left").style.width="50%";
+                    var table = document.getElementById("myTable");
+                    var row = table.insertRow(inn);
+                    var cell1 = row.insertCell(0);
+                    var cell2 = row.insertCell(1);
+                    var cell3 = row.insertCell(2);
+                    credit+=parseFloat(document.getElementById("credit").value);
+                    cell1.innerHTML = document.getElementById("subject").value;
+                    cell2.innerHTML = document.getElementById("credit").value;
+                    cell3.innerHTML = document.getElementById("grade").value; 
+                    inn+=1;
+
+                    document.getElementById("grade").value=""; 
+                    document.getElementById("subject").value=""; 
+                    document.getElementById("credit").value=""; 
+
+                }
+                }
+
+                
+
+            }
+            var ans=1;
+            function calc(){
+                
+                console.log(credit);
+                console.log(grade);
+                console.log("****************");
+                if(sem-1==parseInt(ss)){
+                    document.getElementById("totans").style.display="block";
+                }
+                else{
+                    document.getElementById("numbers").innerHTML = sem;
+                    sem+=1;
+                }
+                // tc+=credit;
+                // tg+=grade;
+                ans=grade/credit;
+                tc+=ans;
+                document.getElementById("answer_gpa").innerHTML=ans;
+                // removee();
+                var table = document.getElementById("myTable");
+
+                for (var i = 1; i < rowCount; i++) {
+                table.deleteRow(1);
+                }
+                inn=1;
+                rowCount=1;
+                credit=0;
+                grade=0;
+                document.getElementById("right").style.display="none";
+                
+                // ss=parseInt(ss)+1;
+
+            }
+            function cpgaans(){
+                var fans=tc/parseInt(ss);
+                document.getElementById("answer_gpa").innerHTML=fans;
+
+            }
+
+
+        
+
+
+        
+        </script>
+        <script type="module">
+            // Import the functions you need from the SDKs you need
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
+            import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-analytics.js";
+            // TODO: Add SDKs for Firebase products that you want to use
+            // https://firebase.google.com/docs/web/setup#available-libraries
+          
+            // Your web app's Firebase configuration
+            // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+            const firebaseConfig = {
+              apiKey: "AIzaSyA6yDJzMwk8nw9KuUmDEdBC2L04FXMXy1M",
+              authDomain: "cgpa-8cc02.firebaseapp.com",
+              projectId: "cgpa-8cc02",
+              storageBucket: "cgpa-8cc02.appspot.com",
+              messagingSenderId: "861498357404",
+              appId: "1:861498357404:web:b458cd1846ee66c5055f59",
+              measurementId: "G-DDSQ5WTRKH"
+            };
+          
+            // Initialize Firebase
+            const app = initializeApp(firebaseConfig);
+            const analytics = getAnalytics(app);
+          </script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row" id="head">
+                <h1>CGPA CALCULATOR</h1>
+            </div>
+            <div class="row" id="semster">
+                <label id="sem">Till</label>
+                <select class="sem" id="semselect">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                </select>
+                <label id="sem">semester</label>
+                <button id="start" type="button" onclick="start()">Start</button>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-4" id="first">
+                    <h2 id="numbers">1</h2>
+                </div>
+                <div class="col-md-4" id="left">
+                    <table class="details">
+                        <tr>
+                            <td><label>Enter Subject</label></td>
+                            <td><input type="text" id="subject"></td>
+                            
+                            <br>
+                        </tr>
+                        <tr>
+                            <td><label>Enter Credit</label></td>
+                            <td><input type="text" id="credit"></td>
+                                             
+                            <br>
+                        </tr>
+                        <tr>
+                            <td><label>Enter Grade</label></td>
+                            <td><input type="text" id="grade"></td>
+                            
+                            
+                            <br>
+                        </tr>
+                        
+                    </table>
+                    <br>
+                    <div class="adddiv"><button id="add" type="button" onclick="myFunction()">Add</button></div>
+
+                    
+                    
+                </div>
+                <div class="col-md-4" id="right">
+                        <table id="myTable">
+                                <tr>
+                                  <th>Subject name</th>
+                                  <th>Credit</th>
+                                  <th>Grade</th>
+                                </tr>
+                                
+                        </table>
+                        <br>
+                        
+            
+                </div>
+            </div>
+            <div class="row">
+                <br>
+                <div class="adddiv"><button id="submit" type="button" onclick="calc()">Submit</button></div>
+                <div class="adddiv" id="totans"><button id="tcgpa" type="button" onclick="cpgaans()">CGPA</button></div>
+                <br>
+                <div class="row">
+                <div class="column" id="ans"><label id="answer_gpa"></label></div>
+                </div>
+
+            </div>
+            
+        </div>
+
+    </body>
+</html>
